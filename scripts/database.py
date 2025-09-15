@@ -135,13 +135,33 @@ def seed_data():
     cursor.executemany("INSERT OR IGNORE INTO SUBJECTS (NAME) VALUES (?)", [(s,) for s in subjects])
 
     # ---- Tasks ----
-    tasks = [
-        ("Basic Trigonometric Ratios", "Learn sine, cosine, and tangent.", 10, "Trigonometry"),
-        ("Quadratic Equations", "Solve quadratic equations using formula and factoring.", 10, "Algebra"),
-        ("Newton’s Laws", "Understand the three laws of motion.", 11, "Physics"),
-        ("Periodic Table", "Memorize groups and periods.", 11, "Chemistry"),
-        ("Sorting Algorithms", "Implement bubble sort and quicksort.", 12, "Computer Science"),
-    ]
+    
+tasks = [
+    # Grade 10
+    ("Basic Trigonometric Ratios", "Learn sine, cosine, and tangent.", 10, "Trigonometry"),
+    ("Graphing Trigonometric Functions", "Plot sine, cosine, and tangent graphs.", 10, "Trigonometry"),
+    ("Quadratic Equations", "Solve quadratic equations using formula and factoring.", 10, "Algebra"),
+    ("Linear Equations", "Solve and graph linear equations.", 10, "Algebra"),
+    ("Newton’s Laws", "Understand the three laws of motion.", 10, "Physics"),
+    ("Atomic Structure", "Learn protons, neutrons, and electrons.", 10, "Chemistry"),
+    ("Basic Programming Concepts", "Understand variables, loops, and conditions.", 10, "Computer Science"),
+
+    # Grade 11
+    ("Trigonometric Identities", "Use fundamental identities to simplify expressions.", 11, "Trigonometry"),
+    ("Complex Numbers", "Understand imaginary numbers and operations.", 11, "Algebra"),
+    ("Projectile Motion", "Calculate range, height, and time of flight.", 11, "Physics"),
+    ("Periodic Table", "Memorize groups and periods.", 11, "Chemistry"),
+    ("Chemical Bonding", "Learn ionic, covalent, and metallic bonding.", 11, "Chemistry"),
+    ("Data Structures", "Learn about arrays, stacks, and queues.", 11, "Computer Science"),
+
+    # Grade 12
+    ("Inverse Trigonometric Functions", "Understand and graph inverse trig functions.", 12, "Trigonometry"),
+    ("Differentiation Basics", "Introduction to derivatives and slopes.", 12, "Algebra"),
+    ("Electromagnetism", "Study magnetic fields and Faraday’s law.", 12, "Physics"),
+    ("Organic Chemistry Basics", "Learn about hydrocarbons and functional groups.", 12, "Chemistry"),
+    ("Sorting Algorithms", "Implement bubble sort and quicksort.", 12, "Computer Science"),
+    ("Database Concepts", "Introduction to SQL and relational databases.", 12, "Computer Science"),
+]
 
     for title, description, grade, subject in tasks:
         cursor.execute("SELECT ID FROM SUBJECTS WHERE NAME = ?", (subject,))
@@ -161,3 +181,18 @@ def seed_data():
 
     conn.commit()
     close_cursor()
+
+
+def get_tasks_by_grade(grade):
+    global cursor, conn
+    create_cursor()
+
+    cursor.execute("""
+        SELECT T.ID, T.TITLE, T.DESCRIPTION, S.NAME as SUBJECT
+        FROM TASK T
+        JOIN SUBJECTS S ON T.SUBJECT_ID = S.ID
+        WHERE T.GRADE = ?
+        """), (grade))
+    tasks = cursor.fetcall()
+    close_cursor()
+    return tasks

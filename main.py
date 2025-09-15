@@ -46,13 +46,19 @@ def register():
             return redirect(url_for('login'))
     return render_template('register.html')
 
-@app.route('/dashboard')
+@app.route('/dashboard, method=["GET", "POST"])
 def dashboard():
     if 'user' not in session:
         flash("Please log in first.", "danger")
         return redirect(url_for('login'))
     user = session['user']
-    return render_template("dashboard.html", user=user)
+
+    if request.method =="POST":
+        task_id = request.from.get("task_id")
+        flash(f"you have selected task ID: {task_id}", 'info')
+        return redirect(url_for('dashboard'))
+    task = db.get_task_by_grade(user['grade'])
+    return render_template("dashboard.html", user=user, tasks=tasks)
 
 @app.route('/logout')
 def logout():
