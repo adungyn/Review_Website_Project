@@ -52,7 +52,7 @@ def dashboard():
         flash("Please log in first.", "danger")
         return redirect(url_for('login'))
     user = session['user']
-    return f'Hello {user['name']}! Welcome to your dashboard!'
+    return render_template("dashboard.html", user=user)
 
 @app.route('/logout')
 def logout():
