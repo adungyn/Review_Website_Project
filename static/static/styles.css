@@ -1,0 +1,96 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container { 
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;  
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+        width: 40px;
+    height: 40px;
+    object-fit: contain;
+    margin-right: 10px;
+}
+
+.site-title {
+    font-size: 20px;
+    color: #333;
+}
+
+.login-box form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-box label {
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.login-box input[type="text"],
+.login-box input[type="password"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-group button {
+    flex: 1;
+    padding: 10px;
+    margin: 5px 2px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-group button:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+.dashboard-box {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 6px;
+}
+
+.flash.success {color: green}
+.flash.danger {color: red}
+.flash.info {color: blue}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset = "utf-8">
+    <title>Login- Reviewing Project</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css')}}">
+</head>
+<body>
+    <div class="container">
+   
+        <header>
+            <img src = "{{ url_for('static', filename='logo.png')}}" alt="Logo" class = "logo">
+            <h1 class="site-title">Reviewing Project</h1>
+        </header>    
+        <div class = "dashboard-box">
+            <h2>Welcome to Your Dashboard! </h2>
+            <p>Hello<strong>{{user.name}}</strong> (Grade: {{ user.grade}})</p>
+            <ul>
+                <li> View Your Task </li>
+                <li>Mark task as coplete</li>
+                <li>Check your progress</li>
+            </ul>
+            <from action="{{url_for('logout')}}" method = "GET">
+                <button type="submit">Logout</button>
+            </from>
+        </div>
+    </div>
+</body>
+</html>

@@ -9,19 +9,25 @@
     <div class = "container">
         <header>
             <img src = "{{ url_for('static', filename='logo.png')}}" alt="Logo" class = "logo">
-            <h1 class="site-title">Reviewing Project</h1>
+            <h1 class="site-title">Hello, new User please tell us your:</h1>
         </header>
         <div class = "login-box">
-            <form method = "POST" action = "{{url_for('login')}}">
+            <form method = "POST" action = "{{url_for('register')}}">
                 <label for="username">Username:</label>
                 <input type= "text" id = "username" name = "username">
                 
                 <label for="password">Password:</label>
                 <input type= "text" id = "password" name = "password">
                 
+                <label for="name">Name:</label>
+                <input type= "text" id = "name" name = "name"> 
+
+                <label for="grade">Grade:</label>
+                <input type= "text" id = "grade" name = "grade">
+
                 <div class = 'button-group'>
-                    <button type = 'submit' name = 'action' value="login">Login</button>
                     <button type = 'submit' name = 'action' value="register">Register</button>
+                    <button type = 'submit' name = 'action' value="login">Login</button>
                 </div>
             </form>
         </div>
