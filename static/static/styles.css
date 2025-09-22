@@ -94,3 +94,22 @@ header {
 .flash.success {color: green}
 .flash.danger {color: red}
 .flash.info {color: blue}
+
+
+
+.progress-container { 
+    width: 100%;
+    background-color: #333;
+    border-radius: 10px; 
+    overflow: hidden; 
+    height: 25px; 
+    margin: 10px 0px;
+}
+
+.progess-bar {
+    background-color: #007BFF;
+    height: 100%; 
+    color: #fff;
+    text-align: center; 
+    line-height: 25px;
+}

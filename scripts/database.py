@@ -192,7 +192,18 @@ def get_tasks_by_grade(grade):
         FROM TASK T
         JOIN SUBJECTS S ON T.SUBJECT_ID = S.ID
         WHERE T.GRADE = ?
-        """), (grade))
+        ORDER BY S.NAME ASC
+        """), (int(grade))
     tasks = cursor.fetcall()
     close_cursor()
     return tasks
+
+
+def get_completed_task_ids(user_id): 
+    global conn, cursor
+    create_cursor()
+    cursor.execute("""
+        SELECT TASK_ID FROM COMPLETED_TASKS WHERE USER_ID =?""", (user_id,))
+    rows = cursor.fetchall()
+    close_cursor()
+    return rows

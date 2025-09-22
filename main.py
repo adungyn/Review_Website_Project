@@ -46,7 +46,7 @@ def register():
             return redirect(url_for('login'))
     return render_template('register.html')
 
-@app.route('/dashboard, method=["GET", "POST"])
+@app.route('/dashboard', method=["GET", "POST"])
 def dashboard():
     if 'user' not in session:
         flash("Please log in first.", "danger")
@@ -54,11 +54,23 @@ def dashboard():
     user = session['user']
 
     if request.method =="POST":
-        task_id = request.from.get("task_id")
+        task_id = request.form.get("task_id")
         flash(f"you have selected task ID: {task_id}", 'info')
         return redirect(url_for('dashboard'))
-    task = db.get_task_by_grade(user['grade'])
-    return render_template("dashboard.html", user=user, tasks=tasks)
+    tasks = db.get_task_by_grade(user['grade'])
+    completed_task = db.get_completed_task_ids(user_id=user["user_id"])
+
+    total_task= len(tasks)
+    done_tasks = len([t for t in tasks if t[0] in completed_task])
+    undone_tasks = total_task - done_tasks
+    if total_task > 0:
+        percent_done = done_tasks/total_task * 100 
+    else: 
+        percent_done = 0
+
+
+    return render_template("dashboard.html", user=user, tasks=tasks, done_tasks=done_tasks, total_task=total_task, percent_done=percent_done, undone_tasks=undone_tasks)
+
 
 @app.route('/logout')
 def logout():
@@ -69,3 +81,5 @@ def logout():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
